@@ -1,0 +1,1 @@
+Nurserik is gay 
