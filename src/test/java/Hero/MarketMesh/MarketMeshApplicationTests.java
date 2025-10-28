@@ -8,6 +8,7 @@ class MarketMeshApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
