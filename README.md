@@ -1,1 +1,1 @@
-Nurserik is gay 
+Eben' , oky sabak
