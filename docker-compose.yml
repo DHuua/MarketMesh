@@ -1,29 +1,37 @@
 version: '3.8'
+
 services:
   postgres:
     image: postgres:15
     container_name: marketmesh-db
     restart: always
     environment:
-      POSTGRES_DB: marketmesh
+      POSTGRES_DB: MarketMeshDB
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: mydhuua
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
     container_name: marketmesh-api
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/marketmesh
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/MarketMeshDB
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_DATASOURCE_PASSWORD: mydhuua
 
 volumes:
   pgdata:

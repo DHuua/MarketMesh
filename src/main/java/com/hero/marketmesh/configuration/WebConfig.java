@@ -12,9 +12,11 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
+                // Разрешаем все эндпойнты для всех источников (только для разработки)
                 registry.addMapping("/**")
-                        .allowedOrigins("*") // Можно указать конкретный фронтенд-домен
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                        .allowedOrigins("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
             }
         };
     }
